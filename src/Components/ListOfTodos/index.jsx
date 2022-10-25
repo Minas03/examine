@@ -11,7 +11,7 @@ const ListOfTodos = () => {
   }
 
   const addTodo = () => {
-    setTodos(prev => ([...prev, { title: inputValue, id: Math.random(), isDone: false }]))
+    setTodos(prev => ([...prev, { title: inputValue, id: Math.random(), isDone: false, isSelected: false }]))
     setInputValue('')
   }
 
@@ -38,8 +38,9 @@ const ListOfTodos = () => {
   }
 
   const checkIsDone = (id) => {
-    setTodos(prev => prev.filter(todo => todo.isDone !== todo.isDone))
+    setTodos(prev => prev.filter((todo) => todo.isDone !== todo.isDone))
   }
+
 
   return (
     <div>

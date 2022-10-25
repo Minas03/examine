@@ -1,8 +1,8 @@
 import { useState } from "react";
 import './styles.css'
 
-const Todo = ({ title, id, isDone, deleteTodo, editTodo, completeTodo, checkIsDone }) => {
-
+const Todo = ({ title, id, isDone, deleteTodo, editTodo, completeTodo }) => {
+  const [toggle, setToggle] = useState(false)
   const [isEditMode, setIsEditMode] = useState(false)
   const [editedTodo, setEditedTodo] = useState('')
 
@@ -23,7 +23,6 @@ const Todo = ({ title, id, isDone, deleteTodo, editTodo, completeTodo, checkIsDo
 
   return (
     <div onClick={() => completeTodo(id)} className='isDone'>
-      {console.log(isDone)}
       {isEditMode ?
         <div>
           {<input value={editedTodo} onChange={e => setEditedTodo(e.target.value)} type='text' />}
@@ -31,10 +30,15 @@ const Todo = ({ title, id, isDone, deleteTodo, editTodo, completeTodo, checkIsDo
           <button onClick={resetEdit}>Cancel</button>
         </div> : <div>
           <input type='checkbox' />
-          {title}
+          <div onClick={() => {
+            setToggle(!toggle)
+          }}>
+            {title}
+          </div>
           <button onClick={editClick}>Edit</button>
         </div>}
       <button onClick={() => deleteTodo(id)}>Delete</button>
+      {toggle ? <p>Selected</p> : null}
     </div>
   )
 }
